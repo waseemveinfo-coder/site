@@ -17,8 +17,8 @@ const CUSTOMER_NUMBER = "0591234789";
 const messages: { from: "customer" | "agent"; text: string; time: string }[] = [
   { from: "customer", text: "مرحبا، شفت إعلانكم عن الشقة بثلاث غرف. لسّا متوفرة؟", time: "4:02 م" },
   { from: "agent", text: "أهلين فيك. إي متوفرة، وفيك تعاينها بكرا العصر إذا بيناسبك.", time: "4:03 م" },
-  { from: "customer", text: "تمام الساعة 5. وإذا جوالي مسكّر احكوا أخوي على 0569874412", time: "4:05 م" },
-  { from: "agent", text: "تم، سجّلنا الموعد بكرا الساعة 5. رح نبعتلك الموقع قبلها بساعة.", time: "4:06 م" },
+  { from: "customer", text: "تمام، الساعة 5 بتناسبني. وبتبعتولي الموقع؟", time: "4:05 م" },
+  { from: "agent", text: "أكيد. سجّلنا موعدك بكرا الساعة 5، ورح نبعتلك الموقع قبلها بساعة.", time: "4:06 م" },
 ];
 
 const LAST = messages.length * 2 - 1; // final step: last message shown
@@ -92,8 +92,20 @@ type Convo = Omit<ReturnType<typeof useConversation>, "ref">;
 
 export function PrivacyDemo() {
   const [view, setView] = useState<View>("employee");
+  const [touched, setTouched] = useState(false);
   const seat = view === "manager" ? "manager" : "employee";
   const { ref, ...convo } = useConversation();
+
+  useEffect(() => {
+    if (!convo.done || touched) return;
+    const t = setTimeout(() => setView("manager"), 1400);
+    return () => clearTimeout(t);
+  }, [convo.done, touched]);
+
+  const choose = (v: View) => {
+    setTouched(true);
+    setView(v);
+  };
 
   return (
     <div ref={ref}>
@@ -105,7 +117,7 @@ export function PrivacyDemo() {
               key={v.id}
               type="button"
               aria-pressed={view === v.id}
-              onClick={() => setView(v.id)}
+              onClick={() => choose(v.id)}
               className={`h-9 flex-1 rounded-[4px] px-3 font-display whitespace-nowrap sm:flex-none sm:px-4 text-sm font-semibold text-muted transition-colors hover:text-ink aria-pressed:bg-ink aria-pressed:text-bg ${v.desktop ? "" : "lg:hidden"}`}
             >
               <span className="hidden sm:inline">منظور </span>
@@ -124,7 +136,10 @@ export function PrivacyDemo() {
         </div>
       </div>
 
-      <div className="mt-2 flex h-7 items-center justify-end">
+      <div className="mt-2 flex min-h-7 flex-wrap items-center justify-between gap-x-4 gap-y-1">
+        <p key={seat} className={`text-[13px] text-muted ${seat === "manager" ? "msg-in" : "invisible"}`}>
+          <span className="font-semibold text-ink">هيك بيشوفها المدير:</span> المحادثة كاملة، والرقم كامل، ومين ردّ وأمتى.
+        </p>
         {convo.done && (
           <button type="button" onClick={convo.replay} className="msg-in inline-flex items-center gap-1.5 text-[13px] font-semibold text-brand-ink hover:underline">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
@@ -227,9 +242,23 @@ function InboxWindow({ seat, convo }: { seat: "employee" | "manager"; convo: Con
             )}
           </div>
 
+          {!masked && (
+            <div className="msg-in flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-line bg-brand-tint px-4 py-2 text-[12px]">
+              <span className="inline-flex items-center gap-1.5 font-semibold text-brand-ink">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
+                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                عم تتابع المحادثة مباشرة
+              </span>
+              <span className="text-muted">المسؤولة: سارة · أول رد خلال دقيقة</span>
+            </div>
+          )}
+
           <ol className="flex flex-1 flex-col gap-1.5 bg-bg p-4">
             {messages.map((m, i) => (
               <Bubble key={i} state={convo.stateOf(i)} own={m.from === "agent"} tone="inbox">
+                {!masked && m.from === "agent" && <span className="block text-[11px] font-semibold text-brand-ink">سارة</span>}
                 <MessageText text={m.text} masked={masked} />
                 <Meta time={m.time} ticks={m.from === "agent" ? tickFor(convo, i) : undefined} />
               </Bubble>
