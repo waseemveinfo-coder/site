@@ -1,65 +1,99 @@
-import Image from "next/image";
+import { StoryHero } from "@/components/sections/StoryHero";
+import { Steps } from "@/components/sections/Steps";
+import { ConnectionOptions } from "@/components/sections/ConnectionOptions";
+import { PrivacyDemo } from "@/components/demo/PrivacyDemo";
+import { Container } from "@/components/ui/Container";
+import { ButtonLink } from "@/components/ui/Button";
+import { site } from "@/lib/site";
+import { MaskSpotlight } from "@/components/home/MaskSpotlight";
+import { PeopleBand } from "@/components/home/PeopleBand";
+import { TeamNote } from "@/components/home/TeamNote";
+import { FeatureExplorer } from "@/components/home/FeatureExplorer";
+import { Sectors } from "@/components/home/Sectors";
+import { Security } from "@/components/home/Security";
+import { PricingTeaser } from "@/components/home/PricingTeaser";
+import { Faq } from "@/components/home/Faq";
+
+const masked = (
+  <bdi dir="ltr" className="font-mono whitespace-nowrap text-ink">
+    05••••••89
+  </bdi>
+);
+
+const steps = [
+  {
+    title: "العميل بيراسلك على واتساب",
+    text: "على رقم شركتك، من تطبيقه العادي. ما بيحمّل شي وما بيتغيّر عليه شي.",
+  },
+  {
+    title: "ديرلي بتستلم وبتوزّع",
+    text: "كل رسالة بتوصل لصندوق واحد، وبتنسلّم للموظف المسؤول عنها.",
+  },
+  {
+    title: "الموظف بيرد والرقم مخفي",
+    text: "بيشوف أول رقمين وآخر رقمين بس، حتى لو العميل كتب رقم جوّا الرسالة.",
+  },
+  {
+    title: "الإدارة بتشوف كل شي",
+    text: "المحادثات كاملة، والأرقام كاملة، ومين ردّ على مين وأمتى.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <StoryHero
+        story="بكل شركة في قصة بتتكرر: موظف بيترك الشغل، وبياخد معه مئات أرقام العملاء على جواله. ديرلي انبنت لتسكّر هالباب."
+        title={
+          <>
+            عميلك بيضلّ عميلك،
+            <br />
+            حتى لو الموظف راح.
+          </>
+        }
+        lead={
+          <p>
+            العميل بيحكي مع شركتك على واتساب متل كل يوم. موظفك بيرد عليه من جوّا ديرلي، والرقم قدّامه هيك: {masked}.
+            بيخدمه وبيتابعه وبيبيعه، بس ما بياخد رقمه معه.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        }
+        points={[
+          "ما في تطبيق جديد للعميل. واتساب نفسه، ورقم شركتك نفسه.",
+          "حتى لو الرقم انكتب جوّا نص الرسالة، بينحجب.",
+          "الرقم الكامل بيظهر للإدارة بس.",
+        ]}
+        actions={
+          <>
+            <ButtonLink href={site.demoHref}>{site.demoLabel}</ButtonLink>
+            <ButtonLink href="#how" variant="secondary">
+              كيف بيشتغل
+            </ButtonLink>
+          </>
+        }
+        visual={<PrivacyDemo />}
+        caption="مثال توضيحي. الأسماء والأرقام غير حقيقية."
+      />
+
+      <section id="how" aria-labelledby="how-title" className="py-14 sm:py-20">
+        <Container>
+          <p className="text-sm font-semibold text-brand-ink">كيف بيشتغل</p>
+          <h2 id="how-title" className="mt-2 max-w-[24ch] text-2xl font-extrabold sm:text-4xl">
+            واتساب من جهة العميل، وديرلي من جهة فريقك.
+          </h2>
+
+          <Steps steps={steps} />
+          <ConnectionOptions />
+        </Container>
+      </section>
+
+      <PeopleBand />
+      <MaskSpotlight />
+      <FeatureExplorer />
+      <Sectors />
+      <Security />
+      <PricingTeaser />
+      <TeamNote />
+      <Faq />
+    </>
   );
 }

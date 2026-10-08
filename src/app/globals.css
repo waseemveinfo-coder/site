@@ -1,26 +1,286 @@
 @import "tailwindcss";
 
+/*
+  Derlly design tokens.
+  Every color in the UI comes from these variables; components never use raw hex.
+  Light is the default. Dark follows the OS unless the user picks a theme
+  (data-theme on <html>, set by ThemeToggle).
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --bg: #f5f7f6;            /* cool off-white page */
+  --surface: #ffffff;       /* cards, panels, menus */
+  --surface-2: #eef2f0;     /* subtle fills: hover rows, table heads */
+  --ink: #0d1b2a;           /* primary text, dark sections */
+  --muted: #4a5866;         /* secondary text (AA on bg + surface) */
+  --line: #d9e0dd;          /* hairline borders */
+  --line-strong: #b9c4bf;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --brand: #0b6e55;         /* deep green: buttons, links, focus */
+  --brand-hover: #095a46;
+  --brand-ink: #0b6e55;     /* brand-colored text */
+  --on-brand: #ffffff;      /* text on brand fills */
+  --brand-tint: #e3f0eb;    /* selected states */
+
+  --warn: #b26a00;          /* amber text / icons */
+  --warn-tint: #fdf1dc;
+
+  --invert-bg: #0d1b2a;     /* dark band sections (same in both themes) */
+  --invert-ink: #e6ecef;
+  --invert-muted: #9fb0bd;
+  --invert-line: #23364a;
+
+  /* Chat illustration only (customer phone + Derlly inbox) */
+  --chat-wall: #ebe6dd;
+  --chat-out: #d6f2df;
+  --tick-read: #1a7fc4;
+
+  --radius: 6px;
+  --header-h: 64px;
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --bg: #0a141e;
+    --surface: #0f1d2b;
+    --surface-2: #152637;
+    --ink: #e6ecef;
+    --muted: #9fb0bd;
+    --line: #22364a;
+    --line-strong: #31495f;
+    --brand: #3dbe97;
+    --brand-hover: #5ccfab;
+    --brand-ink: #5ccfab;
+    --on-brand: #04221a;
+    --brand-tint: #123a31;
+    --warn: #f2b440;
+    --warn-tint: #3a2a0c;
+    --invert-bg: #060d14;
+    --invert-line: #1a2b3c;
+    --chat-wall: #0b141a;
+    --chat-out: #12392f;
+    --tick-read: #53bdeb;
+    color-scheme: dark;
   }
 }
 
+:root[data-theme="dark"] {
+  --bg: #0a141e;
+  --surface: #0f1d2b;
+  --surface-2: #152637;
+  --ink: #e6ecef;
+  --muted: #9fb0bd;
+  --line: #22364a;
+  --line-strong: #31495f;
+  --brand: #3dbe97;
+  --brand-hover: #5ccfab;
+  --brand-ink: #5ccfab;
+  --on-brand: #04221a;
+  --brand-tint: #123a31;
+  --warn: #f2b440;
+  --warn-tint: #3a2a0c;
+  --invert-bg: #060d14;
+  --invert-line: #1a2b3c;
+  --chat-wall: #0b141a;
+  --chat-out: #12392f;
+  --tick-read: #53bdeb;
+  color-scheme: dark;
+}
+
+/* Expose tokens to Tailwind: bg-surface, text-muted, border-line, bg-brand, ... */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-ink: var(--brand-ink);
+  --color-on-brand: var(--on-brand);
+  --color-brand-tint: var(--brand-tint);
+  --color-warn: var(--warn);
+  --color-warn-tint: var(--warn-tint);
+  --color-invert-bg: var(--invert-bg);
+  --color-invert-ink: var(--invert-ink);
+  --color-invert-muted: var(--invert-muted);
+  --color-invert-line: var(--invert-line);
+  --color-chat-wall: var(--chat-wall);
+  --color-chat-out: var(--chat-out);
+  --color-tick-read: var(--tick-read);
+
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-display: var(--font-kufi), var(--font-body), system-ui, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.75;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--brand);
+  color: var(--on-brand);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Redaction bar: sweeps across a phone number as it gets masked. */
+.redact {
+  position: relative;
+  display: inline-block;
+}
+.redact::after {
+  content: "";
+  position: absolute;
+  inset: 0 -2px;
+  background: currentColor;
+  border-radius: 2px;
+  transform: scaleX(0);
+  animation: redact-sweep 700ms ease-in-out;
+}
+@keyframes redact-sweep {
+  0% { transform: scaleX(0); transform-origin: left; }
+  45% { transform: scaleX(1); transform-origin: left; }
+  55% { transform: scaleX(1); transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: right; }
+}
+
+/* Read receipts: grey ticks turn blue once the reply is read. */
+.tick-read {
+  color: var(--muted);
+  animation: tick-read 300ms ease-out 1.4s forwards;
+}
+@keyframes tick-read {
+  to { color: var(--tick-read); }
+}
+
+/* Hero entrance: each line arrives in turn (index via --i). */
+.hero-in {
+  animation: hero-in 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 110ms + 80ms);
+}
+@keyframes hero-in {
+  from { opacity: 0; translate: 0 16px; }
+}
+.hero-visual {
+  animation: hero-visual 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 320ms both;
+}
+@keyframes hero-visual {
+  from { opacity: 0; translate: 0 24px; scale: 0.985; }
+}
+
+/* Chat demo: a bubble landing, the "typing" dots, the composer caret. */
+.msg-in {
+  animation: msg-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes msg-in {
+  from { opacity: 0; translate: 0 8px; scale: 0.96; }
+}
+.typing-dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--muted);
+  animation: typing 1s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 150ms; }
+.typing-dot:nth-child(3) { animation-delay: 300ms; }
+@keyframes typing {
+  0%, 60%, 100% { opacity: 0.35; translate: 0 0; }
+  30% { opacity: 1; translate: 0 -3px; }
+}
+.caret {
+  animation: caret 900ms steps(1) infinite;
+}
+@keyframes caret {
+  50% { opacity: 0; }
+}
+
+/* Links with an arrow lean toward where they lead (left in RTL). */
+.icon-arrow {
+  transition: translate 180ms ease;
+}
+a:hover .icon-arrow,
+button:hover .icon-arrow {
+  translate: -3px 0;
+}
+
+/* Page transitions (React <ViewTransition default="page">): soft fade + rise. */
+::view-transition-old(.page) {
+  animation: 160ms ease-in both page-out;
+}
+::view-transition-new(.page) {
+  animation: 320ms cubic-bezier(0.2, 0.7, 0.2, 1) 60ms both page-in;
+}
+@keyframes page-out {
+  to { opacity: 0; }
+}
+@keyframes page-in {
+  from { opacity: 0; translate: 0 12px; }
+}
+
+/* Sections rise gently into view while scrolling (no JS; skipped where unsupported). */
+@supports (animation-timeline: view()) {
+  main section ~ section > div {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}
+@keyframes rise {
+  from { opacity: 0; translate: 0 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Purposeful motion only; everything collapses for reduced-motion users. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
