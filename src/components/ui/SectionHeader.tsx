@@ -1,27 +1,31 @@
 import type { ReactNode } from "react";
 
+// Section heading in the Bitrix24 manner: a plain, direct title (no label
+// above it, no full stop at the end) and one readable line under it.
+// Centered by default; use align="start" when it sits beside a visual.
 export function SectionHeader({
   id,
-  kicker,
   title,
   lead,
   invert = false,
+  align = "center",
   as: Heading = "h2",
 }: {
   id: string;
-  kicker: string;
   title: ReactNode;
   lead?: ReactNode;
   invert?: boolean;
+  align?: "center" | "start";
   as?: "h1" | "h2";
 }) {
   return (
-    <div className="max-w-[62ch]">
-      <p className={`text-sm font-semibold ${invert ? "text-invert-muted" : "text-brand-ink"}`}>{kicker}</p>
-      <Heading id={id} className="mt-2 text-2xl font-extrabold sm:text-4xl">
+    <div className={align === "center" ? "mx-auto max-w-[780px] text-center" : "max-w-[620px]"}>
+      <Heading id={id} className="text-[1.75rem] leading-[1.45] font-bold sm:text-[2.25rem]">
         {title}
       </Heading>
-      {lead && <p className={`mt-4 text-[17px] leading-8 ${invert ? "text-invert-muted" : "text-muted"}`}>{lead}</p>}
+      {lead && (
+        <p className={`mt-4 text-[18px] leading-[1.9] ${invert ? "text-invert-muted" : "text-ink/75"}`}>{lead}</p>
+      )}
     </div>
   );
 }

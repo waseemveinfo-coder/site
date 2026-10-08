@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ComponentProps } from "react";
 
 type Variant = "primary" | "secondary" | "ghost";
-type Size = "md" | "sm";
+type Size = "lg" | "md" | "sm";
 
 const base =
   "inline-flex items-center justify-center gap-2 rounded-md font-display font-semibold whitespace-nowrap transition-colors duration-150 disabled:opacity-50";
@@ -14,6 +14,7 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes: Record<Size, string> = {
+  lg: "h-12 px-6 text-base",
   md: "h-11 px-5 text-[15px]",
   sm: "h-9 px-4 text-sm",
 };

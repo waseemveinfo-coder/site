@@ -60,7 +60,7 @@ export default function PricingPage() {
       <Breadcrumb items={[{ label: "الأسعار" }]} />
       <StoryHero
         story="ما منحب نبيعك خطة أكبر من حاجتك. مكتب فيه تلات موظفين غير شركة فيها خمسين."
-        title="سعر على قد فريقك."
+        title="أسعار ديرلي"
         lead={<p>ابدأ بتجربة مجانية 7 أيام، وبعدها اختار الخطة اللي بتناسب عدد موظفينك وأرقامك. بدون رسوم ربط، وبدون مفاجآت.</p>}
         actions={
           <>
@@ -76,11 +76,11 @@ export default function PricingPage() {
       <PricingTeaser />
       <section aria-labelledby="quote-title" className="border-b border-line py-14 sm:py-20">
         <Container>
-          <SectionHeader id="quote-title" kicker="كيف بتبلّش" title="تلات خطوات، وبتشتغل." />
+          <SectionHeader id="quote-title" title="كيف بتبلّش مع ديرلي" />
           <Steps steps={steps} />
         </Container>
       </section>
-      <Faq items={pricingFaqs} title="أسئلة عن الأسعار." />
+      <Faq items={pricingFaqs} title="أسئلة عن الأسعار" />
     </>
   );
 }

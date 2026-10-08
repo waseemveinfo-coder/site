@@ -38,7 +38,7 @@ export const faqs = [
 
 export function Faq({
   items = faqs,
-  title = "الأسئلة اللي بتنسأل بأول اجتماع.",
+  title = "أسئلة بتنسأل كتير",
 }: {
   items?: { q: string; a: string }[];
   title?: string;
@@ -46,7 +46,7 @@ export function Faq({
   return (
     <section aria-labelledby="faq-title" className="py-14 sm:py-20">
       <Container className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-        <SectionHeader id="faq-title" kicker="أسئلة شائعة" title={title} />
+        <SectionHeader id="faq-title" title={title} align="start" />
         <div className="divide-y divide-line border-y border-line">
           {items.map((f) => (
             <details key={f.q} className="group py-1">

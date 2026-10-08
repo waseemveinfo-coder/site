@@ -7,10 +7,10 @@ export function TeamNote() {
     <section aria-labelledby="note-title" className="border-b border-line py-14 sm:py-20">
       <Container>
         <figure className="mx-auto max-w-[760px]">
-          <p id="note-title" className="text-sm font-semibold text-brand-ink">
+          <h2 id="note-title" className="text-[1.75rem] leading-[1.45] font-bold sm:text-[2.25rem]">
             كلمة من فريق ديرلي
-          </p>
-          <blockquote className="mt-4 space-y-4 font-display text-xl leading-[1.9] font-semibold sm:text-2xl sm:leading-[1.85]">
+          </h2>
+          <blockquote className="mt-6 space-y-4 text-[19px] leading-[1.95] sm:text-[21px]">
             <p>
               بنينا ديرلي لأننا سمعنا نفس القصة من أصحاب شركات كتير: موظف ترك الشغل، وأخد عملاءه معه.
             </p>
@@ -19,7 +19,7 @@ export function TeamNote() {
             </p>
           </blockquote>
           <figcaption className="mt-8 flex flex-wrap items-center gap-4 border-t border-line pt-6">
-            <span aria-hidden className="grid size-11 place-items-center rounded-full bg-brand font-display text-lg font-extrabold text-on-brand">
+            <span aria-hidden className="grid size-11 place-items-center rounded-full bg-brand font-display text-lg font-bold text-on-brand">
               د
             </span>
             <span className="leading-tight">

@@ -5,12 +5,12 @@ import { StoryHero } from "@/components/sections/StoryHero";
 import { Breadcrumb } from "@/components/sections/Breadcrumb";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Photo } from "@/components/ui/Photo";
+import { CtaPair } from "@/components/ui/CtaPair";
 import { SectorInbox } from "@/components/home/featureViews";
 import { getSolution, solutions } from "@/lib/solutions";
-import { productLinks, site } from "@/lib/site";
+import { productLinks } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -46,14 +46,7 @@ export default async function SolutionPage({ params }: PageProps<"/solutions/[sl
         title={s.hero.title}
         lead={<p>{s.hero.lead}</p>}
         points={s.hero.points}
-        actions={
-          <>
-            <ButtonLink href={site.demoHref}>{site.demoLabel}</ButtonLink>
-            <ButtonLink href="#compare" variant="secondary">
-              شو بيتغيّر
-            </ButtonLink>
-          </>
-        }
+        actions={<CtaPair />}
         visual={<SectorInbox title={s.inbox.title} rows={s.inbox.rows} />}
         caption="مثال توضيحي. الأسماء والأرقام غير حقيقية."
       />
@@ -62,7 +55,7 @@ export default async function SolutionPage({ params }: PageProps<"/solutions/[sl
       <section id="compare" aria-labelledby="compare-title" className="border-b border-line py-14 sm:py-20">
         <Container>
           <div className={s.photo ? "grid items-center gap-8 lg:grid-cols-2 lg:gap-14" : ""}>
-            <SectionHeader id="compare-title" kicker={s.name} title="يوم الشغل، قبل ديرلي وبعدها." />
+            <SectionHeader id="compare-title" title="يوم الشغل قبل ديرلي وبعدها" align={s.photo ? "start" : "center"} />
             {s.photo && <Photo name={s.photo} />}
           </div>
           <div className="mt-10 overflow-hidden rounded-md border border-line-strong bg-surface">
@@ -72,7 +65,7 @@ export default async function SolutionPage({ params }: PageProps<"/solutions/[sl
             </div>
             {s.compare.map((c) => (
               <div key={c.without} className="grid border-b border-line last:border-b-0 sm:grid-cols-2">
-                <p className="px-5 py-4 text-[15px] leading-7 text-muted">
+                <p className="px-5 py-4 text-[16px] leading-8 text-ink/70">
                   <span className="mb-1 block text-[12px] font-semibold sm:hidden">بدون ديرلي</span>
                   {c.without}
                 </p>
@@ -88,7 +81,7 @@ export default async function SolutionPage({ params }: PageProps<"/solutions/[sl
 
       <section aria-labelledby="tools-title" className="border-b border-line bg-surface py-14 sm:py-20">
         <Container>
-          <SectionHeader id="tools-title" kicker="الأدوات" title={`اللي بيفرق مع ${s.name}.`} />
+          <SectionHeader id="tools-title" title={`أدوات بتفرق مع ${s.name}`} />
           <ul className="mt-10 grid border-t border-line md:grid-cols-2">
             {s.features.map((f, i) => {
               const link = productLinks.find((l) => l.href === `/product/${f.slug}`);
@@ -104,7 +97,7 @@ export default async function SolutionPage({ params }: PageProps<"/solutions/[sl
                         {link.label}
                         <Icon name="arrow" size={16} />
                       </span>
-                      <span className="mt-1 block text-[15px] leading-7 text-muted">{f.line}</span>
+                      <span className="mt-1 block text-[16px] leading-8 text-ink/70">{f.line}</span>
                     </span>
                   </Link>
                 </li>
@@ -116,7 +109,7 @@ export default async function SolutionPage({ params }: PageProps<"/solutions/[sl
 
       <section aria-labelledby="others-title" className="py-14 sm:py-16">
         <Container>
-          <h2 id="others-title" className="text-xl font-extrabold sm:text-2xl">
+          <h2 id="others-title" className="text-xl font-bold sm:text-2xl">
             قطاعات تانية
           </h2>
           <ul className="mt-5 flex flex-wrap gap-2">

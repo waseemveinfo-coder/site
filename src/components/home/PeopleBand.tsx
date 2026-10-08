@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Photo } from "@/components/ui/Photo";
+import { CheckList } from "@/components/ui/Check";
 
 // The human side of the story: the people Derlly is built for.
 const lines = [
@@ -17,18 +18,11 @@ export function PeopleBand() {
         <div>
           <SectionHeader
             id="people-title"
-            kicker="مبنية لفريقك"
-            title="ثقة بين الشركة وفريقها، وبين الفريق وعملائه."
-            lead="ديرلي مش بس أداة رقابة. هي طريقة شغل بتريّح الكل:"
+            title="ثقة بين الشركة وفريقها وعملائها"
+            align="start"
+            lead="ديرلي مش أداة رقابة، هي طريقة شغل بتريّح الكل."
           />
-          <ul className="mt-6 divide-y divide-line border-y border-line">
-            {lines.map((l) => (
-              <li key={l} className="flex gap-3 py-3.5 text-[16px] leading-7">
-                <span aria-hidden className="mt-[11px] size-1.5 shrink-0 rounded-full bg-brand" />
-                {l}
-              </li>
-            ))}
-          </ul>
+          <CheckList className="mt-6" items={lines} />
         </div>
       </Container>
     </section>

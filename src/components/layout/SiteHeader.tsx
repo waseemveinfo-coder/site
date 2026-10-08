@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
-import { ButtonLink } from "@/components/ui/Button";
+import { ButtonLink, buttonClass } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "./ThemeToggle";
 import { mainNav, site, type MainNavItem, type NavLink } from "@/lib/site";
@@ -119,9 +119,9 @@ export function SiteHeader() {
               تسجيل الدخول
             </a>
           )}
-          <ButtonLink href={site.demoHref} size="sm">
-            اطلب عرضاً<span className="max-[379px]:hidden"> تجريبياً</span>
-          </ButtonLink>
+          <a href={site.trialHref} className={buttonClass("primary", "sm")}>
+            {site.trialLabel}
+          </a>
           <button
             type="button"
             className="grid size-10 place-items-center rounded-md text-ink hover:bg-surface-2 lg:hidden"
@@ -182,7 +182,12 @@ export function SiteHeader() {
                 <span className="font-medium">المظهر</span>
                 <ThemeToggle />
               </div>
-              <ButtonLink href={site.demoHref}>{site.demoLabel}</ButtonLink>
+              <a href={site.trialHref} className={buttonClass("primary", "md")}>
+                {site.trialLabel} · 7 أيام
+              </a>
+              <ButtonLink href={site.demoHref} variant="secondary">
+                {site.demoLabel}
+              </ButtonLink>
               {site.loginHref && (
                 <a href={site.loginHref} className="py-2 text-center font-medium">
                   تسجيل الدخول

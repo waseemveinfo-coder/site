@@ -1,18 +1,23 @@
-// Numbered steps in one hairline row (4 across on desktop, stacked on phones).
+// A short process shown as connected boxes (arrows point along the reading
+// direction). No big step numbers.
 export function Steps({ steps }: { steps: { title: string; text: string }[] }) {
   const cols = steps.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4";
   return (
-    <ol className={`mt-10 grid border-t border-line sm:grid-cols-2 ${cols}`}>
+    <ol className={`mt-10 grid gap-4 sm:grid-cols-2 lg:gap-8 ${cols}`}>
       {steps.map((s, i) => (
-        <li
-          key={s.title}
-          className="border-b border-line py-6 sm:pe-6 lg:border-b-0 lg:border-e lg:px-6 lg:first:ps-0 lg:last:border-e-0"
-        >
-          <span className="font-mono text-sm text-muted" dir="ltr">
-            0{i + 1}
-          </span>
-          <h3 className="mt-2 text-lg font-bold">{s.title}</h3>
-          <p className="mt-2 text-[15px] leading-7 text-muted">{s.text}</p>
+        <li key={s.title} className="relative rounded-md border border-line bg-surface p-5">
+          <h3 className="text-[19px] leading-8 font-bold">{s.title}</h3>
+          <p className="mt-1.5 text-[16px] leading-8 text-ink/70">{s.text}</p>
+          {i < steps.length - 1 && (
+            <span
+              aria-hidden
+              className="absolute top-1/2 -end-7 hidden size-6 -translate-y-1/2 place-items-center text-brand lg:grid"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 6l-6 6 6 6" />
+              </svg>
+            </span>
+          )}
         </li>
       ))}
     </ol>

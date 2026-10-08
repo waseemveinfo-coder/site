@@ -15,6 +15,7 @@ export const site = {
   // From the current derlly.com (owner's own published details).
   loginHref: "https://app.derlly.com" as string | null,
   trialHref: "https://app.derlly.com",
+  trialLabel: "ابدأ مجاناً",
   whatsappHref: "https://wa.me/970592356941" as string | null,
   whatsappDisplay: "+970 59 235 6941",
   email: "support@derlly.com" as string | null,

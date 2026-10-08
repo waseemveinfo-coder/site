@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { ButtonLink } from "@/components/ui/Button";
+import { CtaPair } from "@/components/ui/CtaPair";
 import { footerColumns, site } from "@/lib/site";
 
 export function SiteFooter() {
@@ -11,22 +11,10 @@ export function SiteFooter() {
       <div className="border-b border-invert-line">
         <Container className="flex flex-col gap-5 py-10 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="font-display text-xl font-bold sm:text-2xl">فريقك يشتغل، وعملاؤك يضلّوا إلك.</p>
+            <p className="font-display text-xl font-bold sm:text-2xl">فريقك بيشتغل، وعملاؤك بيضلّوا إلك</p>
             <p className="mt-1 text-invert-muted">عندك سؤال؟ في حدا حقيقي رح يرد عليك، 24/7. أو احجز جلسة نوريك فيها ديرلي على شغلك أنت.</p>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <ButtonLink href={site.demoHref}>{site.demoLabel}</ButtonLink>
-            {site.whatsappHref && (
-              <a
-                href={site.whatsappHref}
-                target="_blank"
-                rel="noopener"
-                className="inline-flex h-11 items-center gap-2 rounded-md border border-invert-line px-5 font-display text-[15px] font-semibold text-invert-ink hover:border-invert-ink"
-              >
-                احكينا على واتساب
-              </a>
-            )}
-          </div>
+          <CtaPair invert />
         </Container>
       </div>
 

@@ -66,8 +66,7 @@ export function PricingTeaser() {
       <Container>
         <SectionHeader
           id="pricing-title"
-          kicker="الأسعار"
-          title="خطة على قد فريقك."
+          title="أسعار واضحة على قد فريقك"
           lead="حجب أرقام العملاء موجود بكل الخطط، حتى بالتجربة المجانية. ابدأ 7 أيام مجاناً، وبعدها اختار الخطة اللي بتناسبك. الأسعار بالدولار، شهرياً، وبدون رسوم ربط."
         />
 
@@ -80,7 +79,7 @@ export function PricingTeaser() {
               <h3 className="text-lg font-bold">{p.name}</h3>
               <p className="mt-1 text-[14px] text-muted">{p.who}</p>
               <p className="mt-5 flex items-baseline gap-2">
-                <span className="font-display text-3xl font-extrabold" dir="ltr">
+                <span className="font-display text-3xl font-bold" dir="ltr">
                   {p.price}
                 </span>
                 <span className="text-[14px] text-muted">{p.unit}</span>

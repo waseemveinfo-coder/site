@@ -7,8 +7,9 @@ import { Steps } from "@/components/sections/Steps";
 import { Breadcrumb } from "@/components/sections/Breadcrumb";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
+import { Check } from "@/components/ui/Check";
+import { CtaPair } from "@/components/ui/CtaPair";
 import { PrivacyDemo } from "@/components/demo/PrivacyDemo";
 import { MaskSpotlight } from "@/components/home/MaskSpotlight";
 import {
@@ -24,7 +25,7 @@ import {
   WorkflowView,
 } from "@/components/home/featureViews";
 import { getProduct, products, type ProductVisual } from "@/lib/products";
-import { productLinks, site } from "@/lib/site";
+import { productLinks } from "@/lib/site";
 
 const visuals: Record<ProductVisual, ComponentType> = {
   privacy: PrivacyDemo,
@@ -77,14 +78,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
         title={p.hero.title}
         lead={<p>{p.hero.lead}</p>}
         points={p.hero.points}
-        actions={
-          <>
-            <ButtonLink href={site.demoHref}>{site.demoLabel}</ButtonLink>
-            <ButtonLink href="#how" variant="secondary">
-              كيف بتشتغل
-            </ButtonLink>
-          </>
-        }
+        actions={<CtaPair />}
         visual={<Visual />}
         caption="مثال توضيحي. الأسماء والأرقام غير حقيقية."
       />
@@ -92,8 +86,8 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
       {/* The why: the story behind the feature */}
       <section aria-labelledby="why-title" className="border-b border-line py-14 sm:py-20">
         <Container className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
-          <SectionHeader id="why-title" kicker={p.why.kicker} title={p.why.title} />
-          <div className="space-y-5 text-[17px] leading-9 text-muted lg:pt-8">
+          <SectionHeader id="why-title" title={p.why.title} align="start" />
+          <div className="space-y-5 text-[18px] leading-[1.95] text-ink/80 lg:pt-2">
             {p.why.text.map((t) => (
               <p key={t}>{t}</p>
             ))}
@@ -103,7 +97,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
 
       <section id="how" aria-labelledby="how-title" className="border-b border-line bg-surface py-14 sm:py-20">
         <Container>
-          <SectionHeader id="how-title" kicker="كيف بتشتغل" title={`${p.name}، بتلات خطوات.`} />
+          <SectionHeader id="how-title" title={`كيف بتشتغل ${p.name}`} />
           <Steps steps={p.steps} />
         </Container>
       </section>
@@ -112,22 +106,24 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
 
       <section aria-labelledby="details-title" className="border-b border-line py-14 sm:py-20">
         <Container>
-          <SectionHeader id="details-title" kicker="بالتفصيل" title="شو بتاخد بالضبط." />
-          <ul className="mt-10 grid border-t border-line md:grid-cols-2">
-            {p.details.map((d, i) => (
-              <li key={d.title} className={`border-b border-line py-6 ${i % 2 === 0 ? "md:border-e md:pe-8" : "md:ps-8"}`}>
-                <h3 className="text-lg font-bold">{d.title}</h3>
-                <p className="mt-1.5 text-[15px] leading-7 text-muted">{d.text}</p>
+          <SectionHeader id="details-title" title={`${p.name} بالتفصيل`} />
+          <ul className="mx-auto mt-10 grid max-w-[1000px] gap-x-12 gap-y-4 md:grid-cols-2">
+            {p.details.map((d) => (
+              <li key={d.title} className="flex gap-2.5 text-[17px] leading-8">
+                <Check />
+                <span>
+                  <strong className="font-bold">{d.title}:</strong> <span className="text-ink/75">{d.text}</span>
+                </span>
               </li>
             ))}
           </ul>
-          {p.note && <p className="mt-6 border-s-2 border-warn ps-3 text-[15px] leading-7 text-muted">{p.note}</p>}
+          {p.note && <p className="mt-6 border-s-2 border-warn ps-3 text-[16px] leading-8 text-ink/70">{p.note}</p>}
         </Container>
       </section>
 
       <section aria-labelledby="related-title" className="py-14 sm:py-16">
         <Container>
-          <h2 id="related-title" className="text-xl font-extrabold sm:text-2xl">
+          <h2 id="related-title" className="text-xl font-bold sm:text-2xl">
             بيشتغل مع
           </h2>
           <ul className="mt-6 grid gap-px overflow-hidden rounded-md border border-line bg-line md:grid-cols-3">
@@ -140,7 +136,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
                       {l.label}
                       <Icon name="arrow" size={16} />
                     </span>
-                    {l.desc && <span className="mt-1 block text-[15px] leading-7 text-muted">{l.desc}</span>}
+                    {l.desc && <span className="mt-1 block text-[16px] leading-8 text-ink/70">{l.desc}</span>}
                   </span>
                 </Link>
               </li>

@@ -1,78 +1,68 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Photo } from "@/components/ui/Photo";
+import { CheckList } from "@/components/ui/Check";
 import { Icon } from "@/components/ui/Icon";
-import { solutionLinks } from "@/lib/site";
+import { solutions } from "@/lib/solutions";
 
-// Problem line + "with Derlly" line per sector, keyed by solution href.
-const stories: Record<string, { pain: string; fix: string }> = {
-  "/solutions/real-estate": {
-    pain: "الوسيط بيترك المكتب، والعملاء بيلحقوه.",
-    fix: "العميل بيضل يحكي مع رقم المكتب، والوسيط الجديد بيكمّل من وين وقف اللي قبله.",
-  },
-  "/solutions/engineering": {
-    pain: "مخططات وعروض أسعار ضايعة بين جوالات المهندسين.",
-    fix: "كل ملف وكل مهمة مربوطة بمحادثتها، ومحفوظة باسم الشركة.",
-  },
-  "/solutions/sales": {
-    pain: "ما بتعرف مين عم يشتغل، ومين عم يأجّل.",
-    fix: "كل عميل إله بائع مسؤول، وتقرير شهري بيوريك أداء كل واحد.",
-  },
-  "/solutions/clinics": {
-    pain: "أرقام المرضى بين إيدين كل موظفي الاستقبال.",
-    fix: "الاستقبال بيحجز وبيتابع مع المريض، ورقمه محجوب.",
-  },
-  "/solutions/retail": {
-    pain: "نفس الأسئلة كل يوم، والرد بيتأخر.",
-    fix: "البوت بيرد على المتكرر، والفريق بيتفرّغ للطلبات الحقيقية.",
-  },
-  "/solutions/services": {
-    pain: "طلبات صيانة وتوصيل بتنتسى بين الرسائل.",
-    fix: "كل طلب بيصير تذكرة أو مهمة، إلها مسؤول وموعد.",
-  },
-};
-
+// "Something for every team": one tab per sector, each with a photo,
+// the sector's headline, four concrete wins and a link to its page.
 export function Sectors({ as = "h2" }: { as?: "h1" | "h2" }) {
+  const [active, setActive] = useState(0);
+  const s = solutions[active];
+
   return (
     <section aria-labelledby="sectors-title" className="border-b border-line bg-surface py-14 sm:py-20">
       <Container>
         <SectionHeader
           id="sectors-title"
           as={as}
-          kicker="الحلول"
-          title="لكل شركة عندها فريق بيحكي مع عملاء."
-          lead="المشكلة نفسها بكل قطاع: العميل بيحكي مع الموظف، والشركة بتخسره لما الموظف يمشي. الحل نفسه، بتفاصيل على قد شغلك."
+          title="ديرلي لكل شركة عندها فريق بيحكي مع عملاء"
+          lead="اختار قطاعك، وشوف كيف بيتغيّر يوم الشغل عندك."
         />
 
-        <ul className="mt-10 grid border-t border-line md:grid-cols-2">
-          {solutionLinks.map((s, i) => {
-            const story = stories[s.href];
-            return (
-              <li key={s.href} className={`border-b border-line ${i % 2 === 0 ? "md:border-e md:pe-8" : "md:ps-8"}`}>
-                <Link href={s.href} className="group grid grid-cols-[auto_1fr] gap-x-4 py-6">
-                  <span className="mt-1 grid size-10 place-items-center rounded-md border border-line text-brand-ink group-hover:border-brand">
-                    <Icon name={s.icon ?? "building"} />
-                  </span>
-                  <span>
-                    <span className="flex items-center gap-1 font-display text-lg font-bold group-hover:text-brand-ink">
-                      {s.label}
-                      <Icon name="arrow" size={16} className="opacity-0 transition-opacity group-hover:opacity-100" />
-                    </span>
-                    {story && (
-                      <>
-                        <span className="mt-1.5 block text-[15px] leading-7 text-muted">{story.pain}</span>
-                        <span className="mt-1 block text-[15px] leading-7">
-                          <span className="font-semibold text-brand-ink">مع ديرلي: </span>
-                          {story.fix}
-                        </span>
-                      </>
-                    )}
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <div role="tablist" aria-label="القطاعات" className="-mx-4 mt-10 flex gap-2 overflow-x-auto px-4 pb-1 sm:justify-center">
+          {solutions.map((x, i) => (
+            <button
+              key={x.slug}
+              role="tab"
+              type="button"
+              id={`sector-tab-${x.slug}`}
+              aria-selected={i === active}
+              aria-controls="sector-panel"
+              onClick={() => setActive(i)}
+              className="shrink-0 rounded-full border border-line-strong px-4 py-2 text-[15px] font-semibold whitespace-nowrap text-ink/75 transition-colors hover:border-ink hover:text-ink aria-selected:border-ink aria-selected:bg-ink aria-selected:text-bg"
+            >
+              {x.name}
+            </button>
+          ))}
+        </div>
+
+        <div
+          key={s.slug}
+          id="sector-panel"
+          role="tabpanel"
+          aria-labelledby={`sector-tab-${s.slug}`}
+          className="msg-in mt-8 grid items-center gap-8 rounded-md border border-line bg-bg p-5 sm:p-8 lg:grid-cols-2 lg:gap-12"
+        >
+          {s.photo ? <Photo name={s.photo} /> : <div className="aspect-[3/2] rounded-md bg-surface-2" />}
+          <div>
+            <h3 className="text-[1.5rem] leading-[1.5] font-bold sm:text-[1.75rem]">{s.hero.title}</h3>
+            <p className="mt-3 text-[17px] leading-8 text-ink/75">{s.hero.story}</p>
+            <CheckList className="mt-5" items={s.compare.map((c) => c.with)} />
+            <Link
+              href={`/solutions/${s.slug}`}
+              className="mt-7 inline-flex items-center gap-1.5 text-[16px] font-semibold text-brand-ink hover:underline"
+            >
+              شوف حل {s.name}
+              <Icon name="arrow" size={18} />
+            </Link>
+          </div>
+        </div>
       </Container>
     </section>
   );

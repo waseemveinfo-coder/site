@@ -33,7 +33,7 @@ export default function SupportPage() {
       <Breadcrumb items={[{ label: "الدعم الفني" }]} />
       <StoryHero
         story="أول أسبوع مع أي نظام جديد هو الأصعب. ما رح تكون لحالك فيه."
-        title="فريق بيحكي لغتك، وبيعرف شغلك."
+        title="دعم فني بالعربي، 24/7"
         lead={<p>منساعدك بالإعداد وبتدريب فريقك، ومنضل معك بعد الإطلاق. بالعربي، 24/7، ومن ناس بيعرفوا ديرلي من جوّا.</p>}
         points={["دعم 24/7، كل أيام الأسبوع.", "على واتساب وعلى الإيميل.", "مساعدة بالإعداد وتدريب الفريق."]}
         actions={<ButtonLink href="/help">مركز المساعدة</ButtonLink>}
@@ -43,7 +43,7 @@ export default function SupportPage() {
       <section aria-labelledby="support-how" className="border-b border-line py-14 sm:py-20">
         <Container>
           <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
-            <SectionHeader id="support-how" kicker="معك من أول يوم" title="شو منعمل معك." lead="فريق دعم بيعرف ديرلي من جوّا، ومتواجد 24/7 على واتساب والإيميل." />
+            <SectionHeader id="support-how" title="شو منعمل معك" align="start" lead="فريق دعم بيعرف ديرلي من جوّا، ومتواجد 24/7 على واتساب والإيميل." />
             <Photo name="support" />
           </div>
           <Steps steps={steps} />
@@ -51,7 +51,7 @@ export default function SupportPage() {
       </section>
       <section aria-labelledby="support-contact" className="py-14 sm:py-16">
         <Container>
-          <h2 id="support-contact" className="text-xl font-extrabold sm:text-2xl">
+          <h2 id="support-contact" className="text-xl font-bold sm:text-2xl">
             تواصل مع الدعم
           </h2>
           {channels.length ? (

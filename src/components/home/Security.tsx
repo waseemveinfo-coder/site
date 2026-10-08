@@ -25,8 +25,8 @@ export function Security() {
         <div>
           <SectionHeader
             id="security-title"
-            kicker="الأمان"
-            title="بيانات عملائك بتضل بالشركة."
+            title="بيانات عملائك بتضل بالشركة"
+            align="start"
             lead="الأمان بديرلي مش إعداد إضافي بتفعّله. هو الأساس اللي انبنت عليه المنصة."
           />
           <ul className="mt-8 divide-y divide-line border-y border-line">
@@ -35,7 +35,7 @@ export function Security() {
                 <Icon name="lock" size={18} className="mt-1 text-brand-ink" />
                 <div>
                   <h3 className="text-base font-bold">{c.title}</h3>
-                  <p className="mt-0.5 text-[15px] leading-7 text-muted">{c.text}</p>
+                  <p className="mt-0.5 text-[16px] leading-8 text-ink/70">{c.text}</p>
                 </div>
               </li>
             ))}

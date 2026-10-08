@@ -28,12 +28,12 @@ export default function HelpPage() {
       <Breadcrumb items={[{ label: "مركز المساعدة" }]} />
       <StoryHero
         story="كل سؤال بيوصلنا من عميل، بنكتب جوابه هون، كرمال العميل اللي بعده ما يحتاج يسأل."
-        title="كيف بتعمل أي شي بديرلي."
+        title="مركز مساعدة ديرلي"
         lead={<p>شروحات قصيرة وواضحة، مرتبة حسب الموضوع. وإذا ما لقيت جوابك، فريق الدعم موجود.</p>}
       />
       <section aria-labelledby="topics-title" className="border-b border-line py-14 sm:py-20">
         <Container>
-          <h2 id="topics-title" className="text-2xl font-extrabold sm:text-3xl">
+          <h2 id="topics-title" className="text-2xl font-bold sm:text-3xl">
             المواضيع
           </h2>
           <ul className="mt-8 grid gap-px overflow-hidden rounded-md border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
@@ -42,7 +42,7 @@ export default function HelpPage() {
                 <>
                   <Icon name={t.icon} className="text-brand-ink" />
                   <span className="mt-3 block font-display text-lg font-bold">{t.title}</span>
-                  <span className="mt-1 block text-[15px] leading-7 text-muted">{t.text}</span>
+                  <span className="mt-1 block text-[16px] leading-8 text-ink/70">{t.text}</span>
                   <span className="mt-3 block text-[13px] text-muted">{t.href ? "اقرأ أكتر" : "الشروحات قيد الكتابة"}</span>
                 </>
               );
@@ -67,7 +67,7 @@ export default function HelpPage() {
           </p>
         </Container>
       </section>
-      <Faq items={faqs} title="أكتر الأسئلة تكراراً." />
+      <Faq items={faqs} title="أكتر الأسئلة تكراراً" />
     </>
   );
 }

@@ -35,7 +35,7 @@ export function ConnectionOptions() {
             <p className="mt-1 text-[13px] text-muted" dir="auto">
               {o.via}
             </p>
-            <p className="mt-3 text-[15px] leading-7 text-muted">{o.text}</p>
+            <p className="mt-3 text-[16px] leading-8 text-ink/70">{o.text}</p>
           </div>
         ))}
       </div>

@@ -1,9 +1,9 @@
 import type { CSSProperties, ReactNode } from "react";
 import { Container } from "@/components/ui/Container";
+import { Check, fragment } from "@/components/ui/Check";
 
-// Every page opens with one of these: a short story line, the claim, and a
-// real product view beside it. Text sits at the reading start (right in RTL);
-// the visual sits at the end, never centered.
+// Every page opens with the claim, then the story behind it in plain prose,
+// a short checklist, and a real product view beside it.
 export function StoryHero({
   story,
   title,
@@ -21,31 +21,37 @@ export function StoryHero({
   visual?: ReactNode;
   caption?: string;
 }) {
+  const at = (i: number) => ({ "--i": i }) as CSSProperties;
   return (
     <section className="border-b border-line bg-surface">
-      <Container className={`grid items-start gap-10 py-10 sm:py-14 lg:gap-14 lg:py-20 ${visual ? "lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)]" : ""}`}>
-        <div className={visual ? "lg:pt-6" : "max-w-[760px]"}>
-          <p className="hero-in border-s-2 border-brand ps-3 text-[15px] leading-7 text-muted" style={{ "--i": 0 } as CSSProperties}>
-            {story}
-          </p>
-          <h1 style={{ "--i": 1 } as CSSProperties} className="hero-in mt-5 text-[2rem] leading-[1.3] font-extrabold sm:text-5xl sm:leading-[1.25] lg:text-[2.35rem] xl:text-[2.5rem]">{title}</h1>
-          <div style={{ "--i": 2 } as CSSProperties} className="hero-in mt-5 max-w-[54ch] text-[17px] leading-8 text-muted">
-            {lead}
+      <Container
+        className={`grid items-start gap-10 py-10 sm:py-14 lg:gap-14 lg:py-16 ${visual ? "lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)]" : ""}`}
+      >
+        <div className={visual ? "lg:pt-4" : "mx-auto max-w-[780px] text-center"}>
+          <h1
+            style={at(0)}
+            className="hero-in text-[2rem] leading-[1.35] font-bold sm:text-[2.6rem] lg:text-[2.35rem] xl:text-[2.55rem]"
+          >
+            {title}
+          </h1>
+          <div style={at(1)} className="hero-in mt-5 space-y-3 text-[18px] leading-[1.9]">
+            <p className="text-ink">{story}</p>
+            <div className="text-ink/75">{lead}</div>
           </div>
 
           {points && (
-            <ul className="mt-6 divide-y divide-line border-y border-line">
+            <ul className={`mt-6 space-y-2.5 ${visual ? "" : "inline-block text-start"}`}>
               {points.map((p, i) => (
-                <li key={i} style={{ "--i": 3 + i } as CSSProperties} className="hero-in flex gap-3 py-3 text-[15px] leading-7">
-                  <span aria-hidden className="mt-[11px] size-1.5 shrink-0 rounded-full bg-brand" />
-                  <span>{p}</span>
+                <li key={i} style={at(2 + i)} className="hero-in flex gap-2.5 text-[17px] leading-8">
+                  <Check />
+                  <span>{fragment(p)}</span>
                 </li>
               ))}
             </ul>
           )}
 
           {actions && (
-            <div style={{ "--i": 3 + (points?.length ?? 0) } as CSSProperties} className="hero-in mt-8 flex flex-wrap gap-3">
+            <div style={at(2 + (points?.length ?? 0))} className={`hero-in mt-8 flex flex-wrap gap-3 ${visual ? "" : "justify-center"}`}>
               {actions}
             </div>
           )}
