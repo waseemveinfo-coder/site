@@ -28,8 +28,8 @@ const dayBoost = [0, 1, 1, 0, 0, -1];
 const level = (d: number, h: number) => Math.max(0, Math.min(4, hourShape[h] + (hourShape[h] >= 3 ? dayBoost[d] : 0)));
 const shade = ["bg-surface-2", "bg-brand/15", "bg-brand/35", "bg-brand/60", "bg-brand"];
 
-export function ReportsDemo() {
-  const { ref, step, done, replay } = useScene(DELAYS);
+export function ReportsDemo({ onDone }: { onDone?: () => void }) {
+  const { ref, step, done, replay } = useScene(DELAYS, onDone);
   const on = (i: number) => step >= i;
 
   return (

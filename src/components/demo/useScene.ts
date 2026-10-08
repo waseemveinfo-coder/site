@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 // Drives a short scripted scene: `step` advances through `delays` (ms after
 // the previous step) once the element is on screen. Reduced-motion users
 // jump straight to the final step. `replay` restarts from step 0.
-export function useScene(delays: number[]) {
+export function useScene(delays: number[], onDone?: () => void) {
   const ref = useRef<HTMLDivElement>(null);
   const [step, setStep] = useState(-1);
   const last = delays.length;
@@ -39,5 +39,15 @@ export function useScene(delays: number[]) {
     return () => clearTimeout(t);
   }, [step, last, delays]);
 
-  return { ref, step, done: step >= last, replay: () => setStep(0) };
+  // Tell the parent (hero tabs) once the scene has finished playing.
+  const doneRef = useRef(onDone);
+  useEffect(() => {
+    doneRef.current = onDone;
+  });
+  const done = step >= last;
+  useEffect(() => {
+    if (done) doneRef.current?.();
+  }, [done]);
+
+  return { ref, step, done, replay: () => setStep(0) };
 }

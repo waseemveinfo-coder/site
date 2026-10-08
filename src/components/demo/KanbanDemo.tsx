@@ -20,8 +20,8 @@ const base: Record<"todo" | "doing" | "done", Card[]> = {
 
 const NEW: Card = { id: "n", title: "عرض سعر الطابق التاني", who: "م. أحمد", due: "الخميس", tone: "new" };
 
-export function KanbanDemo() {
-  const { ref, step, done, replay } = useScene(DELAYS);
+export function KanbanDemo({ onDone }: { onDone?: () => void }) {
+  const { ref, step, done, replay } = useScene(DELAYS, onDone);
   const landed = step >= 3;
   const moved = step >= 4;
   const cols = {

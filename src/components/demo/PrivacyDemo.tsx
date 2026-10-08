@@ -90,11 +90,20 @@ function useConversation() {
 
 type Convo = Omit<ReturnType<typeof useConversation>, "ref">;
 
-export function PrivacyDemo() {
+export function PrivacyDemo({ onDone }: { onDone?: () => void }) {
   const [view, setView] = useState<View>("employee");
   const [touched, setTouched] = useState(false);
   const seat = view === "manager" ? "manager" : "employee";
   const { ref, ...convo } = useConversation();
+
+  // Report completion to the hero tabs (after the hand-off to the manager seat).
+  const doneRef = useRef(onDone);
+  useEffect(() => {
+    doneRef.current = onDone;
+  });
+  useEffect(() => {
+    if (convo.done) doneRef.current?.();
+  }, [convo.done]);
 
   useEffect(() => {
     if (!convo.done || touched) return;

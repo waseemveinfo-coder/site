@@ -9,8 +9,8 @@ import { Icon } from "@/components/ui/Icon";
 // Each step of the scene reveals the next line or node.
 const DELAYS = [450, 450, 450, 500, 450, 450, 450, 450];
 
-export function WorkflowDemo() {
-  const { ref, step, done, replay } = useScene(DELAYS);
+export function WorkflowDemo({ onDone }: { onDone?: () => void }) {
+  const { ref, step, done, replay } = useScene(DELAYS, onDone);
   const on = (i: number) => step >= i;
 
   return (

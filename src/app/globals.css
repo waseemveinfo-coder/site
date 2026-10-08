@@ -229,6 +229,16 @@ p {
   50% { opacity: 0; }
 }
 
+/* Hero tabs: a thin bar fills while waiting to open the next tab. */
+.tab-countdown {
+  transform-origin: right;
+  animation: countdown var(--hold, 4000ms) linear both;
+}
+@keyframes countdown {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 /* Links with an arrow lean toward where they lead (left in RTL). */
 .icon-arrow {
   transition: translate 180ms ease;
