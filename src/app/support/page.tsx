@@ -44,7 +44,7 @@ export default function SupportPage() {
         <Container>
           <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
             <SectionHeader id="support-how" title="شو منعمل معك" align="start" lead="فريق دعم بيعرف ديرلي من جوّا، ومتواجد 24/7 على واتساب والإيميل." />
-            <Photo name="support" />
+            <Photo name="supportPhone" />
           </div>
           <Steps steps={steps} />
         </Container>

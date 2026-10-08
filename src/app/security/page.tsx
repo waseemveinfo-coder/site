@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { StoryHero } from "@/components/sections/StoryHero";
 import { Breadcrumb } from "@/components/sections/Breadcrumb";
 import { PrivacyView } from "@/components/home/featureViews";
-import { MaskSpotlight } from "@/components/home/MaskSpotlight";
 import { Security } from "@/components/home/Security";
 import { Faq, faqs } from "@/components/home/Faq";
 import { Container } from "@/components/ui/Container";
@@ -22,7 +21,7 @@ const tech = [
 export const metadata: Metadata = {
   title: "الأمان والخصوصية",
   description:
-    "كيف بتحمي ديرلي بيانات عملائك: أرقام محجوبة عن الموظفين حتى جوّا نص الرسالة، كشف للإدارة بس، سجل نشاط، وملفات محفوظة باسم الشركة.",
+    "كيف بتحمي ديرلي بيانات عملائك: أرقام العملاء محجوبة عن الموظفين، الرقم الكامل للإدارة بس، سجل نشاط، وملفات محفوظة باسم الشركة.",
   alternates: { canonical: "/security" },
 };
 
@@ -39,7 +38,7 @@ export default function SecurityPage() {
           </p>
         }
         points={[
-          "الرقم محجوب عن الموظف بكل مكان، حتى جوّا الرسالة.",
+          "رقم العميل محجوب عن الموظف.",
           "الرقم الكامل لصاحب الصلاحية بس.",
           "كل كشف للرقم موثّق بالاسم والوقت.",
         ]}
@@ -47,7 +46,6 @@ export default function SecurityPage() {
         visual={<PrivacyView />}
         caption="مثال توضيحي. الأرقام غير حقيقية."
       />
-      <MaskSpotlight />
       <Security />
       <section aria-labelledby="tech-title" className="border-b border-line bg-surface py-14 sm:py-20">
         <Container>

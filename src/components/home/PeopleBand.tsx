@@ -14,11 +14,11 @@ export function PeopleBand() {
   return (
     <section aria-labelledby="people-title" className="border-b border-line bg-surface py-14 sm:py-20">
       <Container className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-        <Photo name="homeTeam" />
+        <Photo name="managerReports" />
         <div>
           <SectionHeader
             id="people-title"
-            title="ثقة بين الشركة وفريقها وعملائها"
+            title="المدير شايف كل شي، والفريق شغّال براحته"
             align="start"
             lead="ديرلي مش أداة رقابة، هي طريقة شغل بتريّح الكل."
           />

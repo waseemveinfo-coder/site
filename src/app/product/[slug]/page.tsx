@@ -11,7 +11,6 @@ import { Icon } from "@/components/ui/Icon";
 import { Check } from "@/components/ui/Check";
 import { CtaPair } from "@/components/ui/CtaPair";
 import { PrivacyDemo } from "@/components/demo/PrivacyDemo";
-import { MaskSpotlight } from "@/components/home/MaskSpotlight";
 import {
   AiBotView,
   BroadcastView,
@@ -102,7 +101,6 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
         </Container>
       </section>
 
-      {p.slug === "privacy" && <MaskSpotlight />}
 
       <section aria-labelledby="details-title" className="border-b border-line py-14 sm:py-20">
         <Container>

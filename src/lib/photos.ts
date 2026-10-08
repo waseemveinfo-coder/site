@@ -2,9 +2,12 @@
 // scripts/process-photos.mjs: 3:2, 1800x1200, one shared grade.
 // Content rule from the owner: men, or women in hijab, modest dress only.
 
-export type PhotoKey = "homeTeam" | "realEstate" | "engineering" | "sales" | "clinics" | "retail" | "services" | "support";
+export type PhotoKey = "homeTeam" | "managerReports" | "demoAbaya" | "supportPhone" | "realEstate" | "engineering" | "sales" | "clinics" | "retail" | "services" | "support";
 
 export const photos: Record<PhotoKey, { src: string; alt: string }> = {
+  managerReports: { src: "/photos/manager-reports.jpg", alt: "مدير بالشماغ عم يتابع تقارير فريقه على الشاشة" },
+  demoAbaya: { src: "/photos/demo-abaya.jpg", alt: "سيدة أعمال بالعباية والحجاب عم تشتغل على اللابتوب" },
+  supportPhone: { src: "/photos/support-phone.jpg", alt: "موظفة دعم محجبة عم ترد على عميل بالتلفون" },
   realEstate: { src: "/photos/real-estate.jpg", alt: "وسيط عقاري عم يسلّم مفاتيح الشقة ويصافح العميل" },
   homeTeam: { src: "/photos/home-team.jpg", alt: "زميلتين محجبات عم يراجعوا أوراق شغل سوا" },
   engineering: { src: "/photos/engineering.jpg", alt: "مهندس بخوذة بيقرا مخطط مشروع قدّام مبنى قيد الإنشاء" },

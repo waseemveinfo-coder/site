@@ -296,7 +296,7 @@ export function SectorInbox({ title, rows }: { title: string; rows: SectorRow[] 
           </li>
         ))}
       </ul>
-      <p className="border-t border-line bg-bg px-4 py-2.5 text-[12px] text-muted">الأرقام محجوبة عن الموظف، حتى جوّا الرسائل.</p>
+      <p className="border-t border-line bg-bg px-4 py-2.5 text-[12px] text-muted">أرقام العملاء محجوبة عن الموظف.</p>
     </Frame>
   );
 }
@@ -304,7 +304,7 @@ export function SectorInbox({ title, rows }: { title: string; rows: SectorRow[] 
 /* Internal team chat */
 export function InternalChatView() {
   const msgs = [
-    { who: "سارة", text: "العميل 0591234789 بدّه خصم على الدفعة الأولى، مين بيوافق؟", own: false },
+    { who: "سارة", text: "عميل الشقة بدّه خصم على الدفعة الأولى، مين بيوافق؟", own: false },
     { who: "المدير", text: "موافق لحد 5%، وحوّليلي التذكرة إذا طلب أكتر.", own: true },
     { who: "أحمد", text: "أنا ماسك عميل بنفس المشروع، منرتّب المعاينتين سوا؟", own: false },
   ];

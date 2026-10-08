@@ -1,11 +1,10 @@
 import { StoryHero } from "@/components/sections/StoryHero";
 import { Steps } from "@/components/sections/Steps";
 import { ConnectionOptions } from "@/components/sections/ConnectionOptions";
-import { PrivacyDemo } from "@/components/demo/PrivacyDemo";
+import { HeroShowcase } from "@/components/demo/HeroShowcase";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { CtaPair } from "@/components/ui/CtaPair";
-import { MaskSpotlight } from "@/components/home/MaskSpotlight";
 import { PeopleBand } from "@/components/home/PeopleBand";
 import { TeamNote } from "@/components/home/TeamNote";
 import { FeatureExplorer } from "@/components/home/FeatureExplorer";
@@ -31,7 +30,7 @@ const steps = [
   },
   {
     title: "الموظف بيرد والرقم محجوب",
-    text: "بيشوف أول رقمين وآخر رقمين بس، بكل مكان بالمنصة",
+    text: "بيشوف أول رقمين وآخر رقمين من رقم العميل بس",
   },
   {
     title: "المدير بيشوف كل شي",
@@ -56,9 +55,14 @@ export default function Home() {
             العميل بيحكي مع شركتك على واتساب متل كل يوم، وموظفك بيرد عليه من جوّا ديرلي والرقم قدّامه هيك: {masked}
           </p>
         }
-        points={["واتساب نفسه ورقم شركتك نفسه، بدون تطبيق جديد للعميل", "الرقم محجوب عن الموظف بكل مكان", "الرقم الكامل والمحادثات كاملة عند الإدارة"]}
+        points={[
+          "رقم العميل محجوب عن الموظف، والرقم الكامل عند الإدارة",
+          "أي رسالة بتصير مهمة على لوحة كانبان بكبسة",
+          "مسارات تلقائية بترد وبتوزّع المحادثات بدون مبرمج",
+          "تقارير بتوريك الموظف النشيط والمقصّر وساعات الذروة",
+        ]}
         actions={<CtaPair />}
-        visual={<PrivacyDemo />}
+        visual={<HeroShowcase />}
         caption="مثال توضيحي. الأسماء والأرقام غير حقيقية."
       />
 
@@ -76,7 +80,6 @@ export default function Home() {
         </Container>
       </section>
 
-      <MaskSpotlight />
       <Sectors />
       <PeopleBand />
       <Security />
